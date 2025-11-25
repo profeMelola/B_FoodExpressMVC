@@ -10,13 +10,20 @@
 
 <div class="container mt-5">
 
-    <h2 class="mb-4">Create New Restaurant</h2>
+
+    <h2 class="mb-4" th:text="${mode == 'create'}? 'Create Restaurant': 'Edit Restaurant'"></h2>
 
     <!-- Show error -->
     <div th:if="${errorMessage}" class="alert alert-danger" th:text="${errorMessage}"></div>
 
-    <form th:action="@{/restaurants/create}" th:object="${restaurant}" method="post"
+<!--    <form th:action="@{/restaurants/create}" th:object="${restaurant}" method="post"-->
+<!--          class="card p-4 shadow">-->
+
+    <form th:action="${mode == 'create'}? '/restaurants/create':'/restaurants/update/'+${restaurant.id}"
+
+          th:object="${restaurant}" method="post"
           class="card p-4 shadow">
+
 
         <div class="mb-3">
             <label class="form-label">Name</label>
@@ -32,6 +39,11 @@
             <label class="form-label">Phone</label>
             <input th:field="*{phone}" class="form-control">
         </div>
+
+        <input type="hidden" th:if="${mode == 'edit'}" th:field="*{id}"/>
+
+<!--        <input type="hidden" th:if="${mode == 'edit'}"-->
+<!--               name="id" th:value="${id}">-->
 
         <button class="btn btn-primary">Create</button>
         <a th:href="@{/dashboard}" class="btn btn-secondary ms-2">Cancel</a>
