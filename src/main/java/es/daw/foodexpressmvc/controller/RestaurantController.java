@@ -47,7 +47,8 @@ public class RestaurantController {
     }
 
     @PostMapping("/create")
-    public String create(@ModelAttribute("restaurant") RestaurantDTO restaurantDTO, Model model, Principal principal) {
+    public String create(@ModelAttribute("restaurant") RestaurantDTO restaurantDTO,
+                         Model model, Principal principal) {
 
         RestaurantDTO saved = restaurantsService.create(restaurantDTO);
         model.addAttribute(saved);
@@ -75,7 +76,7 @@ public class RestaurantController {
 
         RestaurantDTO restDTO = restaurantsService.findById(id);
 
-        model.addAttribute("mode","edit");
+        model.addAttribute("mode","update");
         model.addAttribute("restaurant",restDTO);
         return "restaurants/restaurant-form";
 
@@ -84,10 +85,12 @@ public class RestaurantController {
     @PostMapping("/update/{id}")
     public String update(@PathVariable Long id,
                          @Valid @ModelAttribute("restaurant") RestaurantDTO restaurantDTO,
-                         BindingResult bindingResult
+                         BindingResult bindingResult,
+                         Model model
     ){
 
         if (bindingResult.hasErrors()){
+            model.addAttribute("mode","update");
             return "restaurants/restaurant-form"; //pendiente leer!!!!
         }
 

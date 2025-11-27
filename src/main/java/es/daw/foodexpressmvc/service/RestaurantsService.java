@@ -137,6 +137,8 @@ public class RestaurantsService {
 
         String token = apiAuthService.getToken();
 
+        // http://localhost:8082/api/restaurants/14
+        // body: json
         try {
             webClientAPI
                     .put()

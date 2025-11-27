@@ -38,14 +38,19 @@
         <div class="mb-3">
             <label class="form-label">Phone</label>
             <input th:field="*{phone}" class="form-control">
+
+            <div class="text-danger"
+                 th:if="${#fields.hasErrors('phone')}"
+                 th:errors="*{phone}"></div>
+
         </div>
 
-        <input type="hidden" th:if="${mode == 'edit'}" th:field="*{id}"/>
+        <input type="hidden" th:if="${mode == 'update'}" th:field="*{id}"/>
 
 <!--        <input type="hidden" th:if="${mode == 'edit'}"-->
 <!--               name="id" th:value="${id}">-->
 
-        <button class="btn btn-primary">Create</button>
+        <button class="btn btn-primary" th:text="${mode == 'create'}? 'Create':'Update'"></button>
         <a th:href="@{/dashboard}" class="btn btn-secondary ms-2">Cancel</a>
 
     </form>

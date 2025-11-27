@@ -3,16 +3,22 @@ package es.daw.foodexpressmvc.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RestaurantDTO {
     //@JsonProperty(access = JsonProperty.Access.READ_ONLY)
     // Normalmente el ID solo lo envía la API, no el cliente
     // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
+
+
 
     // ===== NAME =====
     @NotBlank(message = "Restaurant name is required")
@@ -38,10 +44,10 @@ public class RestaurantDTO {
     @NotBlank(message = "Phone is required")
     @Size(min = 9, max = 20, message = "Phone must be between 9 and 20 digits")
     // Admite: números, espacios, guiones, + (por si es internacional)
-    @Pattern(
-            regexp = "^[0-9 +()-]{9,20}$",
-            message = "Invalid phone format"
-    )
+//    @Pattern(
+//            regexp = "^[0-9 +()-]{9,20}$",
+//            message = "Invalid phone format"
+//    )
     private String phone;
 
 }
